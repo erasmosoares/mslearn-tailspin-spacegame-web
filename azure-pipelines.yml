@@ -38,6 +38,8 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
 
+# Build debug and release
+
 - template: templates/build.yml
   parameters:
     buildConfiguration: 'Debug'
@@ -46,6 +48,8 @@ steps:
   parameters:
     buildConfiguration: 'Release'
 
+# Unit Tests
+
 - task: DotNetCoreCLI@2
   displayName: 'Run unit tests - $(buildConfiguration)'
   inputs:
@@ -53,7 +57,9 @@ steps:
     arguments: '--no-build --configuration $(buildConfiguration)'
     publishTestResults: true
     projects: '**/*.Tests.csproj'
-        
+
+# Publishing artifacts
+
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   condition: succeeded()
