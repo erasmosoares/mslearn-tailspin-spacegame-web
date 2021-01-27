@@ -32,13 +32,6 @@ steps:
   displayName: 'Write build info'
   workingDirectory: $(wwwrootDir)
 
-# Restore packages
-- task: DotNetCoreCLI@2
-  displayName: 'Restore project dependencies'
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-
 # Restore nuget packages
 - task: NuGetCommand@2
   displayName: 'Restore nuget packages'
